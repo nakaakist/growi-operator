@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: growi-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: growi-operator
+  template:
+    metadata:
+      labels:
+        name: growi-operator
+    spec:
+      serviceAccountName: growi-operator
+      containers:
+        - name: growi-operator
+          # Replace this with the built image name
+          image: nakaakist/growi-operator:v0.0.1
+          command:
+          - growi-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "growi-operator"

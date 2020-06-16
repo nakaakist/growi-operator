@@ -1,0 +1,7 @@
+apiVersion: growi.nakaakist.org/v1alpha1
+kind: Growi
+metadata:
+  name: example-growi
+spec:
+  # Add fields here
+  size: 3
